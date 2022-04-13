@@ -14,62 +14,24 @@
 				class="productItem__img"
 			/>
 		</figure>
-		<div class="productItem__foot">
-			<input
-				class="productItem__btn"
-				type="button"
-				value="-"
-				:disabled="counterNum === min"
-				@click="counterNum--"
-			/>
-			<input
-				type="text"
-				:value="counterNum"
-				disabled
-				class="productItem__counter"
-				@input="$emit('update-total')"
-			/>
-			<input
-				class="productItem__btn"
-				type="button"
-				value="+"
-				:disabled="counterNum === max"
-				@click="counterNum++"
-			/>
-		</div>
+		<ProductCounter v-on="$listeners" :parent-max="5" :parent-min="0" />
 	</li>
 </template>
+
 <script>
+	import ProductCounter from "./ProductCounter.vue";
 	export default {
+		components: { ProductCounter },
 		name: "product-item",
-		props: {
-			parentData: Object,
-			parentIndex: Number,
-		},
-		data() {
-			return {
-				counterNum: 0,
-				max: 5,
-				min: 0,
-			};
-		},
-		watch: {
-			counterNum(nval, oval) {
-				this.$emit("update-total", nval - oval);
-			},
-		},
+		props: { parentData: Object },
 	};
 </script>
+
 <style lang="scss" scoped>
 	.productItem {
 		border: 1px solid #ddd;
 		padding: 15px;
 		&__head {
-			text: {
-				align: center;
-			}
-		}
-		&__foot {
 			text: {
 				align: center;
 			}
@@ -100,44 +62,6 @@
 				weight: 600;
 			}
 			color: #f40077;
-		}
-		&__btn {
-			display: inline-block;
-			padding: 7px 15px;
-			border: {
-				width: 1px;
-				style: solid;
-				color: #ddd;
-				radius: 3px;
-			}
-			font: {
-				size: 16px;
-				weight: 600;
-			}
-			background: {
-				color: transparent;
-			}
-			cursor: pointer;
-			&:disabled {
-				cursor: default;
-				background: {
-					color: #f7f7f7;
-				}
-				color: #ddd;
-			}
-		}
-		&__counter {
-			text: {
-				align: center;
-			}
-			font: {
-				size: 22px;
-			}
-			background: {
-				color: transparent;
-			}
-			width: 120px;
-			border: 0;
 		}
 	}
 </style>

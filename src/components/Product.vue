@@ -2,13 +2,12 @@
 	<main class="main">
 		<ul class="product container mx-auto">
 			<ProductItem
-				v-for="(item, index) in data"
+				v-for="item in data"
 				:key="item.name"
 				:parent-data="item"
-				:parent-index="index"
 				@update-total="updateTotal"
 			/>
-			<product-total :parent-data="totalVal" />
+			<product-total :parent-data="sum" />
 		</ul>
 	</main>
 </template>
@@ -21,7 +20,7 @@
 		data() {
 			return {
 				data: [],
-				totalVal: 0,
+				sum: 0,
 			};
 		},
 		async created() {
@@ -35,7 +34,8 @@
 		},
 		methods: {
 			updateTotal(val) {
-				this.totalVal += val;
+				console.log(this)
+				this.sum += val;
 			},
 		},
 	};

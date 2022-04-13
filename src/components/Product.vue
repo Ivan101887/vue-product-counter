@@ -34,7 +34,6 @@
 		},
 		methods: {
 			updateTotal(val) {
-				console.log(this)
 				this.sum += val;
 			},
 		},

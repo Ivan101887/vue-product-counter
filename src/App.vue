@@ -1,18 +1,19 @@
 <template>
-  <div id="app">
-  </div>
+	<div id="app">
+		<Product />
+	</div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+	import Product from "./components/Product.vue";
 
-export default {
-  name: 'App',
-  components: {
-  }
-}
+	export default {
+		name: "App",
+		components: {
+			Product,
+		},
+	};
 </script>
 
 <style lang="scss">
-
 </style>

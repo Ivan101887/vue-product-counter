@@ -5,7 +5,6 @@
 				v-for="item in data"
 				:key="item.name"
 				:parent-data="item"
-				@update-total="updateTotal"
 			/>
 			<product-total :parent-data="sum" />
 		</ul>
@@ -15,26 +14,33 @@
 	import ProductItem from "./ProductItem.vue";
 	import ProductTotal from "./ProductTotal.vue";
 	export default {
-		components: { ProductItem, ProductTotal },
 		name: "Product",
+		components: { ProductItem, ProductTotal },
 		data() {
 			return {
 				data: [],
 				sum: 0,
 			};
 		},
-		async created() {
-			try {
-				const api = "./data.json";
-				const res = await this.$http(api);
-				this.data = res.data;
-			} catch (e) {
-				console.log("資料連接錯誤:\n", e);
-			}
+		created() {
+			this.getData();
+		},
+		provide() {
+			return {
+				addTotal: (val) => {
+					this.sum += val;
+				},
+			};
 		},
 		methods: {
-			updateTotal(val) {
-				this.sum += val;
+			async getData() {
+				try {
+					const api = "./data.json";
+					const res = await this.$http(api);
+					this.data = res.data;
+				} catch (e) {
+					console.log("資料連接錯誤:\n", e);
+				}
 			},
 		},
 	};

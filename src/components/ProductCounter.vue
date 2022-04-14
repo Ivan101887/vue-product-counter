@@ -7,7 +7,7 @@
 			:disabled="counterNum === parentMin"
 			@click="counterNum--"
 		/>
-		<span class="productItem__counter">{{counterNum}}</span>
+		<span class="productItem__counter">{{ counterNum }}</span>
 		<input
 			class="productItem__btn"
 			type="button"
@@ -24,14 +24,19 @@
 			parentMax: Number,
 			parentMin: Number,
 		},
+		inject: ['addTotal'],
+		created(){
+			console.log()
+		},
 		data() {
 			return {
 				counterNum: 0,
+				addTotal: this.addTotal,
 			};
 		},
 		watch: {
 			counterNum(nval, oval) {
-				this.$emit("update-total", nval - oval);
+				this.addTotal(nval - oval);
 			},
 		},
 	};
@@ -69,7 +74,7 @@
 			}
 		}
 		&__counter {
-      display: inline-block;
+			display: inline-block;
 			text: {
 				align: center;
 			}
